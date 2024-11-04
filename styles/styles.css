@@ -24,5 +24,6 @@ body {
 #sketch-container {
     width: 600px;
     height: 600px;
+    padding: 25px;
     background-color: rgb(49, 49, 49);
 }
