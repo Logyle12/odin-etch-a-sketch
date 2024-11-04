@@ -8,4 +8,7 @@ const gridContent = document.querySelector('#grid-content'); // Renamed back to 
 const gridContentWidth = gridContent.clientWidth;
 console.log(`Grid Content Width: ${gridContentWidth}px`); // Log the content width
 
+// Calculate the width and height for each grid cell based on the total number of grids
+const gridCellDimensions = `${gridContentWidth / Math.sqrt(totalGridCells)}px`; // Each grid will be a square
+console.log(`Grid Width: ${gridCellDimensions}px`); // Log the calculated grid cell dimensions
 
