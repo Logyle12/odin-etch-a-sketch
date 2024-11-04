@@ -5,12 +5,12 @@ console.log(`Number of Grids: ${totalGridCells}`); // Log the number of grids to
 // Select the element with the ID 'grid-content' from the DOM
 const gridContent = document.querySelector('#grid-content'); // Renamed back to gridContent
 // Get the width of the grid content area
-const gridContentWidth = gridContent.clientWidth;
+const gridContentWidth = `${gridContent.clientWidth}`;
 console.log(`Grid Content Width: ${gridContentWidth}px`); // Log the content width
 
 // Calculate the width and height for each grid cell based on the total number of grids
 const gridCellDimensions = `${gridContentWidth / Math.sqrt(totalGridCells)}px`; // Each grid will be a square
-console.log(`Grid Width: ${gridCellDimensions}px`); // Log the calculated grid cell dimensions
+console.log(`Grid Width: ${gridCellDimensions}`); // Log the calculated grid cell dimensions
 
 // Loop to create and append grid cells to the grid content
 for (let gridIndex = 0; gridIndex < totalGridCells; gridIndex++) {
