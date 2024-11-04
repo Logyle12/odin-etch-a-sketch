@@ -12,3 +12,16 @@ console.log(`Grid Content Width: ${gridContentWidth}px`); // Log the content wid
 const gridCellDimensions = `${gridContentWidth / Math.sqrt(totalGridCells)}px`; // Each grid will be a square
 console.log(`Grid Width: ${gridCellDimensions}px`); // Log the calculated grid cell dimensions
 
+// Loop to create and append grid cells to the grid content
+for (let gridIndex = 0; gridIndex < totalGridCells; gridIndex++) {
+    // Create a new 'div' element for each grid cell
+    const grid = document.createElement('div');
+    // Add the 'grid' class to the new grid cell
+    grid.classList.add('grid');
+    // Set the width and height of the grid cell
+    grid.style["width"] = gridCellDimensions;
+    grid.style["height"] = gridCellDimensions;
+    console.log("Add Grid"); // Log the addition of a grid cell
+    // Append the new grid cell to the grid content
+    gridContent.appendChild(grid);
+}
