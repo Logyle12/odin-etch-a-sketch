@@ -18,3 +18,9 @@ body {
 #main-title {
     margin-top: 20px;
 }
+
+#sketch-container {
+    width: 600px;
+    height: 600px;
+    background-color: rgb(49, 49, 49);
+}
