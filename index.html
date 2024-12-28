@@ -1,21 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
-    <script defer src="scripts/index.js"></script>
-    <title>Etch-a-Sketch</title>
-</head>
-<body>
-    <div id="app-container">
-        <div id="main-container">
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap" rel="stylesheet">
+        <script defer src="scripts/index.js"></script>
+        <title>Etch-a-Sketch</title>
+    </head>
+    <body>
+        <div class="header">
             <h1 id="main-title">Etch-a-Sketch</h1>
-            <div id="sketch-container">
-                <div id="grid-content">
-                </div>
-            </div>
         </div>
-    </div>    
-</body>
+        <div class="app-container">
+            <section class="color-toolbox">
+                <div class="color-picker">
+                    <div class="color-picker-header section-header">
+                        <h1 class="color-picker-title section-title">Color Picker</h1>
+                    </div>
+                    <div id="color-panel">
+                        <canvas id="color-canvas" height="165" width="165"></canvas>
+                        <div id="drag-pointer"></div>
+                    </div>
+                    <div id="hue-slider-panel">
+                        <canvas id="hue-slider" height="20" width="165" class="slider"></canvas>
+                        <div class="hue-slider-thumb"></div>
+                    </div>
+                    <div class="color-values">
+                        <div class="hex-values">
+                            <div class="hex-color-field color-field">
+                                <label for="hex-input" class="color-label hex-label">HEX</label>
+                                <input 
+                                    id="hex-input"
+                                    class="color-input"
+                                    type="text"
+                                    maxlength="9"
+                                    autocomplete=“off” 
+                                >
+                            </div>
+                        </div>
+                        <div class="color-models">
+                            <div class="rgb-values">
+                                <div class="r-color-field color-field">
+                                    <label for="red-input" class="color-label rgb-label">R</label>
+                                    <input 
+                                        id="red-input"
+                                        class="color-input" 
+                                        type="number"
+                                        maxlength="3"
+                                        inputmode="numeric" 
+                                        autocomplete=“off”
+                                    >
+                                </div>
+                                <div class="g-color-field color-field">
+                                    <label for="green-input" class="color-label rgb-label">G</label>
+                                    <input 
+                                        id="green-input" 
+                                        class="color-input"
+                                        type="number" 
+                                        inputmode="numeric" 
+                                        autocomplete=“off”
+                                    >
+                                </div>
+                                <div class="b-color-field color-field">
+                                    <label for="blue-input" class="color-label rgb-label">B</label>
+                                    <input
+                                        id="blue-input"  
+                                        class="color-input"
+                                        type="number" 
+                                        inputmode="numeric"
+                                        autocomplete=“off”
+                                    >
+                                </div>
+                            </div>
+                            <div class="hsl-values">
+                                <div class="h-color-field color-field">
+                                    <label for="hue-input" class="color-label hsl-label">H</label>
+                                    <input 
+                                        id="hue-input"
+                                        class="color-input" 
+                                        type="number" 
+                                        inputmode="numeric" 
+                                        autocomplete=“off”
+                                    >
+                                </div>
+                                <div class="s-color-field color-field">
+                                    <label for="saturation-input" class="color-label hsl-label">S</label>
+                                    <input 
+                                        id="saturation-input"
+                                        class="color-input" 
+                                        type="number" 
+                                        step="any"
+                                        inputmode="decimal" 
+                                        autocomplete=“off”
+                                    >
+                                </div>
+                                <div class="l-color-field color-field">
+                                    <label for="lightness-input" class="color-label hsl-label">L</label>
+                                    <input 
+                                        id="lightness-input"
+                                        class="color-input" 
+                                        type="number" 
+                                        step="any"
+                                        inputmode="decimal" 
+                                        autocomplete=“off”
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="slider-controls">
+                    <div class="alpha-controls">
+                        <div class="opacity-header range-slider-header">
+                            <h2 id="opacity-title" class="range-slider-title">Opacity</h2>
+                        </div>
+                        <div id="alpha-container">
+                            <input 
+                                class="range-slider-input"
+                                id="alpha-slider"
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.001"
+                                inputmode="numeric"
+                                autocomplete="off"
+                            >
+                            <input 
+                                id="alpha-input"
+                                class="color-input" 
+                                type="number" 
+                                value="1"
+                                step="0.001"
+                                inputmode="decimal" 
+                                autocomplete=“off”
+                            >
+                        </div>
+                    </div>
+                    <div class="brush-size-controls">
+                        <div class="brush-size-header range-slider-header">
+                            <h2 id="brush-size-title" class="range-slider-title">Brush Size</h2>
+                        </div>
+                        <div id="brush-size-container">
+                            <input 
+                                class="range-slider-input"
+                                id="brush-size-slider"
+                                type="range"
+                                min="1"
+                                max="10"
+                                step="1"
+                                inputmode="numeric"
+                                value="1" 
+                                autocomplete="off"
+                            >
+                            <input 
+                                id="brush-size-input"
+                                class="color-input" 
+                                type="number"
+                                min="1"
+                                max="10"
+                                value="1" 
+                                step="1"
+                                inputmode="decimal" 
+                                autocomplete="off"
+                            >
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <section class="main-container">
+                <div class="sketch-container">
+                    <div class="grid-content">
+                    </div>
+                </div>
+            </section>
+            <section class="control-panel">
+                <div class="layout-controls">
+                    <div class="layout-controls-header section-header">
+                        <h1 class="layout-controls-title section-title">Controls</h1>
+                    </div>
+                    <div class="row-controls">
+                        <div id="row-control-header" class="control-header">
+                            <h1 id="row-control-title " class="control-title">ROWS</h1>
+                        </div>
+                        <div id="row" class="controls">
+                            <input 
+                                class="number-input row-input"
+                                type="number"
+                                inputmode="numeric" 
+                                autocomplete="off"
+                            >
+                            <div class="button-controls">
+                                <button class="add-button row-add">+</button>
+                                <button class="remove-button row-remove">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-controls">
+                        <div id="column-control-header" class="control-header">
+                            <h1 id="column-control-title" class="control-title">COLUMNS</h1>
+                        </div>
+                        <div id="column" class="controls">
+                            <input 
+                                class="number-input column-input"
+                                type="number"
+                                inputmode="numeric" 
+                                autocomplete="off"
+                            >
+                            <div class="button-controls">
+                                <button class="add-button column-add">+</button>
+                                <button class="remove-button column-remove">-</button>
+                            </div>
+                        </div>
+                    </div>              
+                </div>
+                <div class="editor-tools">
+                    <div class="editor-tools-header section-header">
+                        <h1 class="editor-tools-title section-title">Tools</h1>
+                    </div>
+                    <div class="drawing-tools">
+                        <div class="tool-button">
+                            <img class="tool-icon " id="fill-tool" src="assets/icons/paint-bucket.png" alt="Paint Bucket Tool">
+                        </div>
+                        <div class="tool-button active-drawing-tool">
+                            <img class="tool-icon" id="brush-tool" src="assets/icons/paint-brush.png" alt="Paint Brush Tool">
+                        </div>
+                        <div class="tool-button">
+                            <img class="tool-icon" id="eraser-tool" src="assets/icons/eraser.png" alt="Eraser">
+                        </div>
+                        <div class="tool-button">
+                            <img class="tool-icon" id="color-picker-tool" src="assets/icons/color-picker.png" alt="Color Picker Tool">
+                        </div>
+                        <div class="grid-tools">
+                            <div class="tool-button active-grid-tool">
+                                <img class="tool-icon" id="grid-line-shade-tool" src="assets/icons/night-mode.png" alt="Tool Size Tool">
+                            </div>
+                            <div class="tool-button">
+                                <img class="tool-icon" id="grid-lines-tool" src="assets/icons/grid-on.png" alt="Grid Tool">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>    
+    </body>
 </html>
