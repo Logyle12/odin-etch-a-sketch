@@ -25,11 +25,11 @@ To run the application locally:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/your-repo/etch-a-sketch.git
+   git clone https://github.com/logyle12/odin-etch-a-sketch.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd etch-a-sketch
+   cd odin-etch-a-sketch
    ```
 3. Open `index.html` in your preferred web browser.
 
