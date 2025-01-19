@@ -15,7 +15,7 @@
 .header {
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     color: rgb(222, 228, 234); 
     background-color: rgba(0, 0, 0, 0.871);
     padding: 15px;
@@ -24,34 +24,38 @@
 }
 
 #main-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     font-size: 36px;
-}
-
-#main-title {
     font-family: "Pixelify Sans";
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     letter-spacing: 3px;
+    text-shadow: 2px 2px 8px rgb(222, 228, 234);
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
 }
 
 .main-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    flex-wrap: wrap;
     width: 68%;
     height: 100%;
     background-color: rgb(45, 45, 45);
     column-gap: 32px;
+    overflow-y: scroll;
 }
 
 .sketch-container {
-    width: 580px;
-    height: 580px;
+    width: 620px;
+    height: 620px;
+    padding: 10px;
     margin: 36px auto;
 }
 
@@ -65,8 +69,14 @@
     cursor: cell;
 }
 
-.grid {
-    outline: 1px solid rgba(88, 88, 88, 0.525);
+/* .grid-cell {
+    outline: 1px solid rgba(119, 60, 60, 0.5);
+} */
+
+.canvas-overlay {
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 36px;
+    display: none;
 }
 
 span {
@@ -84,10 +94,35 @@ span {
     background-color: rgb(30, 30, 30);
 }
 
+
+.color-toolbox {
+    overflow-y: scroll;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(88, 88, 88, 0.523);; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(114, 114, 114, 0.614); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(85, 85, 85); 
+}
+
 .section-header {
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 18px;
     margin-left: 15px;
     margin-right: 15px;
     text-align: center;
@@ -106,7 +141,7 @@ span {
     color: rgba(255, 255, 255, 0.90); 
 }
 
-.color-picker, .slider-controls {
+.color-picker, .slider-controls, .color-palette, .layout-controls, .editor-tools {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -114,14 +149,90 @@ span {
     margin-right: 25px;
     margin-bottom: 12px;
     gap: 26px 24px;
+    width: 165px;
+}
+
+.color-palette {
+    margin-bottom: 60px;
+    row-gap: 20px;
+}
+
+.select-menu {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+select {
+    border: none;
+    background-color: rgba(88, 88, 88, 0.229);
+    color: rgba(240, 248, 255, 0.859);
+    width: 67%;
+    height: 32px;
+    font-family: 'Roboto';
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+select option {
+    border: none;
+    background-color: rgba(34, 34, 34);
+    color: rgba(240, 248, 255, 0.859);
+}
+
+.color-swatches {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 4px;
+    padding: 3px;
+    overflow-y: scroll;
+    height: 105px;
+}
+
+.color-block {
+    width: 27px;
+    height: 27px;
+    outline: 1px solid rgba(88, 88, 88, 0.523);
+    background-color: rgb(255, 255, 255);
+}
+
+.color-swatch {
+    width: 100%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.color-block:hover, #active-swatch {
+    outline: 2.25px solid rgba(240, 248, 255, 0.859);
+}
+
+.color-block:hover {
+    transition: outline 0.25s 0.05s ease-in;
+}
+
+.swatch-icon {
+    font-family: 'Roboto';
+    font-weight: 100;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 18px;
+    text-align: center;
+    color: rgba(240, 248, 255, 0.859);
 }
 
 #color-panel {
     position: relative;
     cursor: crosshair;
     overflow: hidden;
-    outline: 1px solid rgba(88, 88, 88, 0.523);
-    
+    background-color: rgb(255, 255, 255);
+    outline: 1px solid rgba(88, 88, 88, 0.523);  
 }
 
 #drag-pointer {
@@ -140,6 +251,7 @@ span {
     position: relative;
     cursor: grab;
     overflow: hidden;
+    background-color: rgb(255, 255, 255);
     outline: 1px solid rgba(88, 88, 88, 0.523);
 }
 
@@ -157,7 +269,6 @@ span {
 .color-values {
     display: flex;
     flex-flow: column wrap;
-    width: 165px;
     height: 140px;
     gap: 24px;
     font-family: 'Roboto';
@@ -192,7 +303,7 @@ span {
 }
 
 .color-input {
-    border: 0px;
+    border: none;
     width: 100%;
     height: 20px;
     text-align: end;
@@ -223,7 +334,6 @@ input[type="number"] {
   
 .slider-controls {
     margin-top: 12px;
-    width: 165px;
 }
 
 .alpha-controls, .brush-size-controls {
@@ -261,7 +371,7 @@ input[type="number"] {
     width: 18px;
     height: 18px;
     background-color: rgb(95, 95, 95);
-    border: 0px rgb(0, 0, 0);
+    border: none rgb(0, 0, 0);
     border-radius: 50%;
     transition: transform 0.30s 0.03s ease-in-out,
                 box-shadow 0.30s 0.03s ease-in-out;
@@ -276,7 +386,7 @@ input[type="number"] {
     width: 18px;
     height: 18px;
     background-color: rgb(95, 95, 95);
-    border: 0px rgb(0, 0, 0);
+    border: none rgb(0, 0, 0);
     border-radius: 50%;
     transition: transform 0.30s 0.03s ease-in-out,
                 box-shadow 0.30s 0.03s ease-in-out;
@@ -301,24 +411,18 @@ input[type="number"] {
     width: 16%;
     height: 100%;
     background-color: rgb(30, 30, 30);
+    /* overflow-y: scroll; */
 }
 
 .layout-controls {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 36px;
-    width: 165px;
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-bottom: 15px;
+    gap: 22px;
 }
 
 .row-controls, .column-controls {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 165px;
+    height: 105px;
 } 
 
 .row-controls, .column-controls, .add-button, .remove-button {
@@ -326,16 +430,9 @@ input[type="number"] {
 }
 
 .control-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    padding: 10px;
-    background-color:rgba(88, 88, 88, 0.251)
-   
+    padding: 8px;
 }
-.control-title, .number-input, .add-button, .remove-button {
+.control-title, .grid-input, .add-button, .remove-button {
     font-family: "Pixelify Sans";
     font-weight: 100;
     font-optical-sizing: auto;
@@ -356,15 +453,15 @@ input[type="number"] {
     outline: 2.5px solid rgba(88, 88, 88, 0.523); 
 }
 
-.number-input {
-    border: 0px;
+.grid-input {
+    border: none;
     text-align: center;
     color: rgb(231, 231, 231);
     background-color: rgba(226, 226, 226, 0.249);
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
-.number-input, .button-controls {
+.grid-input, .button-controls {
     width: 50%;
     height: 100%;
     font-size: 24px;
@@ -376,56 +473,131 @@ input[type="number"] {
 }
 
 .add-button, .remove-button {
-    border: 0px;
+    border: none;
     color: rgb(231, 231, 231);
-    background-color: rgba(64, 64, 64, 0.312);
     font-size: 24px;
     height: 50%;
     padding: 1px 6px;
     cursor: pointer;
 }
 
-.add-button:hover, .remove-button:hover {
-    background-color: rgba(226, 226, 226, 0.249);
+.history-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px 20px;
+    width: 165px;
+}
+
+
+.history-item {
+    width: 50%;
+    height: 60px;
+    padding: 8px 0px;
+}
+
+.history-button {
+    border: none;
+    border-radius: 2.5px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 2.5px 4px 0 0 rgb(128, 128, 128, 0.523);
+    outline: 2.5px solid rgba(128, 128, 128, 0.523);
+    cursor: pointer;  
+}
+
+.add-button, .remove-button, .history-button, .tool-button {
+    /* Create a two-color gradient split at 50% */
+    background: linear-gradient(to right, rgba(226, 226, 226, 0.249) 50%, rgba(64, 64, 64, 0.312) 50%);
+
+    /* Start the background at the right side (shows dark color first) */ 
+    background-position: right;
+
+    /* Stretch the background to 200% width for sliding effect (height becomes 'auto') */
+    background-size: 200%;
+
+    /* Animate the background position for a smooth sliding effect */
+    transition: background-position 0.35s 0.05s ease-in-out,
+                background-size 0.35s 0.05s ease-in-out,
+                transform 0.35s 0.05s ease-in-out; 
+}
+
+.history-button:active {
+    /* Move the button down and slightly back when active */
+    transform: translate3d(0, 5px, -10px);
+
+    box-shadow: none;
+}
+
+.add-button:active, .remove-button:active, .history-button:active, .zoom-button:active, #save-button:active {
+    /* Change background color when buttons active */
+    background-color: rgb(35, 57, 39);
+}
+
+.add-button:hover, .remove-button:hover, .history-button:hover, .tool-button:hover {
+    /* Shift the background to the left to reveal grey color */
+    background-position: left;
+
+    /* Keep the same smooth transition effect on hover */
+    transition: background-position 0.35s 0.05s ease-in-out;
+}
+
+.history-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s 0.05s ease-in-out;
+}
+
+.history-icon-container:hover {
+    /* Slightly shrink the button on hover for a press effect */
+    transform: scale(0.90);
+
+    /* Apply smooth transition on scaling */
+    transition: all 0.35s 0.05s ease-in-out;
+}
+
+.history-icon {
+    width: 28px;
+    height: 28px;
+    opacity: 0.825;
 }
 
 .editor-tools {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 165px;
-    gap: 36px 20px;
+    gap: 22px 18px;
 }
 
-.drawing-tools, .grid-tools {
+.editor-tools-header {
+    margin-top: 8px;
+}
+
+.drawing-tools, .grid-tools, .zoom-tools, .save-tool {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px 18px;
+    gap: 20px 12px;
 }
 
 .drawing-tools {
-    width: 200px;
+    width: 175px;
 }
 
 .tool-button {
-    width: 50px;
-    height: 50px;
-    padding: 11px;
-    outline: 4px solid rgba(239, 243, 243, 0.38);
-    border-radius: 50%;
-    background-color: rgb(213, 203, 203);
-    transition: outline 0.25s 0.05s ease-in-out,
-                transform 0.50s 0.05s ease-in-out,
-                box-shadow 0.50s 0.05s ease-in-out;
-    cursor: pointer;
-                
+    width: 46px;
+    height: 46px;
+    padding: 8px;
+    border-radius: 2.5px;
+    outline: 2.5px solid rgba(128, 128, 128, 0.523);
+    opacity: 0.825;
+    cursor: pointer;         
 }
 
 .tool-button:hover {
-    transition: all 0.35s 0.05s ease-in-out;
+    transform: translate3d(0, 5px, -10px);
+    transition: background-position 0.35s 0.05s ease-in-out,
+                background-size 0.35s 0.05s ease-in-out,
+                transform 0.35s 0.05s ease-in-out; 
 }
 
 .tool-icon {
@@ -433,12 +605,10 @@ input[type="number"] {
     height: 100%;
 }
 
-.active-drawing-tool, .active-grid-tool, .tool-button:hover {
-    box-shadow: 0px 0px 0px 8px rgba(239, 243, 243, 0.38);
-    transform: scale(0.92);
+.active-drawing-tool, .active-grid-tool, .zoom-threshold {
+    transform: translate3d(0, 5px, -10px);
+    background: none;
+    background-color:  rgb(82, 98, 85);
     transition: all 0.35s 0.05s ease-in-out;
     outline: none;
 }
-
-
-

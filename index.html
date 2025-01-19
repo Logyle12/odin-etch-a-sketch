@@ -11,7 +11,9 @@
     </head>
     <body>
         <div class="header">
-            <h1 id="main-title">Etch-a-Sketch</h1>
+            <div class="main-header">
+                <h1 id="main-title">Etch-a-Sketch</h1>
+            </div>
         </div>
         <div class="app-container">
             <section class="color-toolbox">
@@ -148,7 +150,6 @@
                                 id="brush-size-slider"
                                 type="range"
                                 min="1"
-                                max="10"
                                 step="1"
                                 inputmode="numeric"
                                 value="1" 
@@ -159,7 +160,6 @@
                                 class="color-input" 
                                 type="number"
                                 min="1"
-                                max="10"
                                 value="1" 
                                 step="1"
                                 inputmode="decimal" 
@@ -168,11 +168,105 @@
                         </div>
                     </div>
                 </section>
+                <section class="color-palette">
+                    <div class="color-palette-header section-header">
+                        <h1 class="color-palette-title section-title">Palettes</h1>
+                    </div>
+                    <div class="select-menu">
+                        <select name="Palette" id="palette-select">
+                            <option value="DEFAULT" selected>DEFAULT</option>
+                            <option value="VIVID">VIVID</option>
+                            <option value="SOFT TONES">SOFT TONES</option>
+                            <option value="COLD">COLD</option>
+                            <option value="WARM">WARM</option>
+                        </select>
+                    </div>
+                    <div class="color-swatches">
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                        <div class="color-block">
+                            <button class="color-swatch"></button>
+                        </div>
+                    </div>
+                </section>
             </section>
             <section class="main-container">
                 <div class="sketch-container">
                     <div class="grid-content">
                     </div>
+                </div>
+                <div class="canvas-overlay">
+                    
                 </div>
             </section>
             <section class="control-panel">
@@ -186,7 +280,8 @@
                         </div>
                         <div id="row" class="controls">
                             <input 
-                                class="number-input row-input"
+                                class="grid-input row-input"
+                                title="Press Enter to Update"
                                 type="number"
                                 inputmode="numeric" 
                                 autocomplete="off"
@@ -203,7 +298,8 @@
                         </div>
                         <div id="column" class="controls">
                             <input 
-                                class="number-input column-input"
+                                class="grid-input column-input"
+                                title="Press Enter to Update"
                                 type="number"
                                 inputmode="numeric" 
                                 autocomplete="off"
@@ -213,7 +309,23 @@
                                 <button class="remove-button column-remove">-</button>
                             </div>
                         </div>
-                    </div>              
+                    </div> 
+                    <div class="history-controls">
+                        <div class="history-item">
+                            <button class="history-button" id="undo-button">
+                                <span class="history-icon-container">
+                                    <img class="history-icon" id="undo-icon" src="assets/icons/undo-button.png" alt="Undo Button">
+                                </span>
+                            </button>
+                        </div> 
+                        <div class="history-item">
+                            <button class="history-button" id="redo-button">
+                                <span class="history-icon-container">
+                                    <img class="history-icon" id="redo-icon"  src="assets/icons/redo-button.png" alt="Redo Button">
+                                </span>
+                            </button>
+                        </div>              
+                    </div>
                 </div>
                 <div class="editor-tools">
                     <div class="editor-tools-header section-header">
@@ -221,23 +333,36 @@
                     </div>
                     <div class="drawing-tools">
                         <div class="tool-button">
-                            <img class="tool-icon " id="fill-tool" src="assets/icons/paint-bucket.png" alt="Paint Bucket Tool">
+                            <img class="tool-icon " id="fill-tool" src="assets/icons/paint-bucket-white.png" alt="Paint Bucket Tool">
                         </div>
                         <div class="tool-button active-drawing-tool">
-                            <img class="tool-icon" id="brush-tool" src="assets/icons/paint-brush.png" alt="Paint Brush Tool">
+                            <img class="tool-icon" id="brush-tool" src="assets/icons/paint-brush-white.png" alt="Paint Brush Tool">
                         </div>
                         <div class="tool-button">
-                            <img class="tool-icon" id="eraser-tool" src="assets/icons/eraser.png" alt="Eraser">
+                            <img class="tool-icon" id="eraser-tool" src="assets/icons/eraser-white.png" alt="Eraser">
                         </div>
                         <div class="tool-button">
-                            <img class="tool-icon" id="color-picker-tool" src="assets/icons/color-picker.png" alt="Color Picker Tool">
+                            <img class="tool-icon" id="color-picker-tool" src="assets/icons/color-picker-white.png" alt="Color Picker Tool">
                         </div>
                         <div class="grid-tools">
-                            <div class="tool-button active-grid-tool">
-                                <img class="tool-icon" id="grid-line-shade-tool" src="assets/icons/night-mode.png" alt="Tool Size Tool">
+                            <div class="tool-button">
+                                <img class="tool-icon" id="grid-line-shade-tool" src="assets/icons/dark-mode-white.png" alt="Tool Size Tool">
                             </div>
                             <div class="tool-button">
-                                <img class="tool-icon" id="grid-lines-tool" src="assets/icons/grid-on.png" alt="Grid Tool">
+                                <img class="tool-icon" id="grid-lines-tool" src="assets/icons/grid-on-white.png" alt="Grid Tool">
+                            </div>
+                        </div>
+                        <div class="zoom-tools">
+                            <div class="tool-button zoom-button">
+                                <img class="tool-icon" id="zoom-in-tool" src="assets/icons/zoom-in.png" alt="Zoom In Tool">
+                            </div>
+                            <div class="tool-button zoom-button">
+                                <img class="tool-icon" id="zoom-out-tool" src="assets/icons/zoom-out.png" alt="Zoom Out Tool">
+                            </div>
+                        </div>
+                        <div class="save-tool">
+                            <div class="tool-button" id="save-button">
+                                <img class="tool-icon" id="save-icon" src="assets/icons/save-icon.png" alt="Save Icon">
                             </div>
                         </div>
                     </div>
