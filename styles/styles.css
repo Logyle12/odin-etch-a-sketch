@@ -2,6 +2,8 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(114, 114, 114, 0.614) rgba(88, 88, 88, 0.523);
 }
 
 .app-container {
